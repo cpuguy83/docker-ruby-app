@@ -19,12 +19,13 @@ RUN apt-get install -y ca-certificates sudo curl git-core
 RUN dpkg-divert --local --rename --add /sbin/initctl
 RUN ln -s /bin/true /sbin/initctl
 
+ENV RUBY rubinius
+ENV RUBY_VERSION 2.2.1
+
+RUN locale-gen  en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
-
-ENV RUBY rubinius
-ENV RUBY_VERSION 2.2.1
 
 RUN curl -L https://get.rvm.io | bash -s stable
 RUN /bin/bash -l -c rvm requirements
@@ -34,7 +35,6 @@ RUN rvm install $RUBY-$RUBY_VERSION
 RUN source /usr/local/rvm/scripts/rvm && rvm use ${RUBY}-${RUBY_VERSION}
 RUN echo "source /usr/local/rvm/scripts/rvm" >> /etc/profile
 RUN echo "rvm --default use $RUBY-$RUBY_VERSION" >> /etc/profile
-RUN locale-gen  en_US.UTF-8
 ENV APP_DIR /opt/app
 ENV APP_REPO ""
 ENV INSTALL_CMD bundle exec rake install
