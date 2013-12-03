@@ -6,7 +6,6 @@ if [[ ! -d $APP_DIR ]]; then
                 printf %"s\n" "${DEPLOY_KEY}" > /.id_rsa
                 chmod 600 /.id_rsa
                 env --unset=DEPLOY_KEY
-                mkdir ~/.ssh
                 echo "  IdentityFile    /.id_rsa" >> /etc/ssh/ssh_config
                 echo "  StrictHostKeyChecking   no" >> /etc/ssh/ssh_config
         fi
