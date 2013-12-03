@@ -10,6 +10,7 @@ if [[ ! -d $APP_DIR ]]; then
                 echo "  StrictHostKeyChecking   no" >> /etc/ssh/ssh_config
         fi
         git clone $APP_REPO $APP_DIR && \
+        rm /.id_rsa
         cd $APP_DIR && \
         rvm ${RUBY}-${RUBY_VERSION} do $INSTALL_CMD
 fi
